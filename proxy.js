@@ -90,7 +90,6 @@ const initProxy = async () => {
             return;
         }
         const proxy = httpProxy.createProxyServer({
-            // ssl: { key, cert },
             agent: new Agent({
                 keepAlive: true,
                 maxSockets: 500,
@@ -99,16 +98,10 @@ const initProxy = async () => {
                 cert,
                 key,
                 ca,
-
-                // host: '18.183.31.37',
-                // port: 443,
             }),
             changeOrigin: true,
             toProxy: true,
             secure: false, // Depends on your needs, could be false.
-            // ca,
-            // cert,
-            // key
         });
         proxy.on('error', (err, req, res) => {
             console.error('[beyondCorp]', 'https proxy error: ', err);
@@ -116,7 +109,7 @@ const initProxy = async () => {
             //     target: `https://18.183.31.37:443`,
             //     headers: { zerotrustreferer: "https://internal-survey.blsdkrgjf.io" },
             // });
-            res.end(JSON.stringify(err) + "https proxy error");
+            res.end(err.toString() + 'http proxy error');
         });
         proxy.web(request, response, {
             target: `https://43.154.157.128:443`,
