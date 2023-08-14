@@ -22,10 +22,7 @@ const initProxy = async () => {
             // 本地 https 代理的端口
             const str = `
         function FindProxyForURL(url, host) {
-          if (host === 'bin.bnbstatic.com') {
-            return "HTTPS 127.0.0.1:${httpsPort};DIRECT";
-          }
-          return "DIRECT";
+           return "HTTPS 127.0.0.1:${httpsPort};DIRECT";
         }
       `;
             res.end(str);
@@ -86,9 +83,9 @@ const initProxy = async () => {
     httpsServer.on('request', (request, response) => {
         // 去掉端口
         const host = request?.headers?.host?.split(':')[0];
-        if(host !== "bin.bnbstatic.com"){
-            return;
-        }
+        // if(host !== "bin.bnbstatic.com"){
+        //     return;
+        // }
         const proxy = httpProxy.createProxyServer({
             agent: new Agent({
                 keepAlive: true,
@@ -114,9 +111,9 @@ const initProxy = async () => {
         proxy.web(request, response, {
             target: `https://43.154.157.128:443`,
             // target: `https://18.183.31.37:443`,
-            headers: { Referer: "https://internal-survey.blsdkrgjf.io",
-                // Host: "bin.bnbstatic.com"
-            },
+            // headers: { Referer: "https://internal-survey.blsdkrgjf.io",
+            //     // Host: "bin.bnbstatic.com"
+            // },
         });
     });
     httpsServer.on('close', () => {
