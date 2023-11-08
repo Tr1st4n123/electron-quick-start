@@ -1,3 +1,5 @@
+https://build-artifacts.signal.org/desktop/sqlcipher-4.5.2 --3.0.7-4587e88a4219cb76fd595a5b73f82bfd919b235d75626f40783525f4f58a7503.tar.gz
+
 # electron-quick-start
 
 **Clone and run for a quick way to see Electron in action.**
